@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.25;
 import {NTT} from "./NTT.sol";
-import {Test, console} from "forge-std/Test.sol";
 
 // TODO: make it a library (aka unfuck constants/data)
 contract Falcon {
