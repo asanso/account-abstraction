@@ -29,7 +29,7 @@ import { parseEther } from 'ethers/lib/utils'
 import { UserOperation } from './UserOperation'
 import { JsonRpcProvider } from '@ethersproject/providers'
 
-describe('SimpleAccount', function () {
+describe('FalconSimpleAccount', function () {
   let entryPoint: EntryPoint
   let accounts: string[]
   let testUtil: TestUtil
