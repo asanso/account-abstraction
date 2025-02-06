@@ -31,6 +31,7 @@ import { packUserOp, simulateValidation } from './UserOp'
 import Debug from 'debug'
 
 const debug = Debug('testutils')
+const { getKernel } = require('falcon-sign');
 
 export const AddressZero = ethers.constants.AddressZero
 export const HashZero = ethers.constants.HashZero
@@ -74,6 +75,13 @@ let counter = 0
 
 // create non-random account, so gas calculations are deterministic
 export function createAccountOwner (): Wallet {
+  (async () => 
+    {
+        let Falcon512 = await getKernel('falcon512_n3_v1'); //get falcon512_n3_v1 Kernel
+        let keypair = Falcon512.genkey(); //return { sk, pk, genKeySeed }
+        console.log(keypair)
+        //gernkey
+    })();
   const privateKey = keccak256(Buffer.from(arrayify(BigNumber.from(++counter))))
   return new ethers.Wallet(privateKey, ethers.provider)
   // return new ethers.Wallet('0x'.padEnd(66, privkeyBase), ethers.provider);
