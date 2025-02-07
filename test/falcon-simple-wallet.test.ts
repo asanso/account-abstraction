@@ -19,7 +19,6 @@ import {
   ONE_ETH,
   createAccount,
   createAccountOwner,
-  createAccountOwnerFalcon,
   createAddress,
   deployEntryPoint,
   getBalance,
@@ -29,6 +28,9 @@ import { fillUserOpDefaults, getUserOpHash, encodeUserOp, signUserOp, packUserOp
 import { parseEther } from 'ethers/lib/utils'
 import { UserOperation } from './UserOperation'
 import { JsonRpcProvider } from '@ethersproject/providers'
+
+
+const { getKernel } = require('falcon-sign');
 
 describe('FalconSimpleAccount', function () {
   let entryPoint: EntryPoint
@@ -44,7 +46,10 @@ describe('FalconSimpleAccount', function () {
     if (accounts.length < 2) this.skip()
     testUtil = await new TestUtil__factory(ethersSigner).deploy()
     accountOwner = createAccountOwner()
-    //createAccountOwnerFalcon()
+      // Wait for the Falcon512 kernel
+    let Falcon512 = await getKernel('falcon512_n3_v1'); // Get falcon512_n3_v1 Kernel
+    let keypair = Falcon512.genkey(); // { sk, pk, genKeySeed }
+ 
   })
 
   it('owner should be able to call transfer', async () => {
