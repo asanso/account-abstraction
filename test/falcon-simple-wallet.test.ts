@@ -145,7 +145,10 @@ describe('FalconSimpleAccount', function () {
       }), accountOwner, entryPointEoa, chainId)
 
       userOpHash = await getUserOpHash(userOp, entryPointEoa, chainId)
+      
       let sign = Falcon512.sign(userOpHash , keypair.sk);
+      const buffer: Buffer = Buffer.from(sign);
+
       let op = fillUserOpDefaults({
         sender: account.address,
         callGasLimit,
