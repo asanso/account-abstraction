@@ -145,6 +145,18 @@ describe('FalconSimpleAccount', function () {
       }), accountOwner, entryPointEoa, chainId)
 
       userOpHash = await getUserOpHash(userOp, entryPointEoa, chainId)
+      let sign = Falcon512.sign(userOpHash , keypair.sk);
+      let op = fillUserOpDefaults({
+        sender: account.address,
+        callGasLimit,
+        verificationGasLimit,
+        maxFeePerGas
+      })
+
+      let op2 =  {
+        ...op,
+        //signature: signedMessage1
+      }
 
       expectedPay = actualGasPrice * (callGasLimit + verificationGasLimit)
 

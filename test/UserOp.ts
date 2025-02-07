@@ -117,6 +117,7 @@ export function signUserOp (op: UserOperation, signer: Wallet, entryPoint: strin
   }
 }
 
+
 export function fillUserOpDefaults (op: Partial<UserOperation>, defaults = DefaultsForUserOp): UserOperation {
   const partial: any = { ...op }
   // we want "item:undefined" to be used from defaults, and not override defaults, so we must explicitly
