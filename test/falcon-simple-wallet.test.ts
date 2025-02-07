@@ -46,10 +46,6 @@ describe('FalconSimpleAccount', function () {
     if (accounts.length < 2) this.skip()
     testUtil = await new TestUtil__factory(ethersSigner).deploy()
     accountOwner = createAccountOwner()
-      // Wait for the Falcon512 kernel
-    let Falcon512 = await getKernel('falcon512_n3_v1'); // Get falcon512_n3_v1 Kernel
-    let keypair = Falcon512.genkey(); // { sk, pk, genKeySeed }
- 
   })
 
   it('owner should be able to call transfer', async () => {
@@ -135,6 +131,11 @@ describe('FalconSimpleAccount', function () {
       const verificationGasLimit = 100000
       const maxFeePerGas = 3e9
       const chainId = await ethers.provider.getNetwork().then(net => net.chainId)
+
+      // Wait for the Falcon512 kernel
+      let Falcon512 = await getKernel('falcon512_n3_v1'); // Get falcon512_n3_v1 Kernel
+      let keypair = Falcon512.genkey(); // { sk, pk, genKeySeed }
+   
 
       userOp = signUserOp(fillUserOpDefaults({
         sender: account.address,
