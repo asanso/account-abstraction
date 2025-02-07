@@ -2,6 +2,8 @@ import { Wallet } from 'ethers'
 import { ethers } from 'hardhat'
 import { expect } from 'chai'
 import { toHex } from 'hardhat/internal/util/bigint'
+import { bufferToHex } from 'ethereumjs-util'
+
 
 import {
   ERC1967Proxy__factory,
@@ -158,7 +160,7 @@ describe('FalconSimpleAccount', function () {
 
       let op2 =  {
         ...op,
-        //signature: signedMessage1
+        signature: bufferToHex(buffer)
       }
 
       expectedPay = actualGasPrice * (callGasLimit + verificationGasLimit)
