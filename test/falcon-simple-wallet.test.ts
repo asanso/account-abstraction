@@ -19,6 +19,7 @@ import {
   ONE_ETH,
   createAccount,
   createAccountOwner,
+  createAccountOwnerFalcon,
   createAddress,
   deployEntryPoint,
   getBalance,
@@ -43,6 +44,7 @@ describe('FalconSimpleAccount', function () {
     if (accounts.length < 2) this.skip()
     testUtil = await new TestUtil__factory(ethersSigner).deploy()
     accountOwner = createAccountOwner()
+    //createAccountOwnerFalcon()
   })
 
   it('owner should be able to call transfer', async () => {
