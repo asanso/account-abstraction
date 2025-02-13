@@ -1,5 +1,7 @@
 Proof of concept of contracts for [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) `SimpleWallet` with Falcon Signature Verification with account abstraction via alternative mempool.
 
+**The solc-js shipped with hardhat is too slow for compiling the Falcon contract, In order to run this example it is needed to install the native solc compiler**
+
 # Usage
 
 ```
