@@ -63,7 +63,7 @@
     "debug": "^4.3.4",
     "depcheck": "^1.4.7",
     "ethereumjs-util": "^7.1.0",
-    "falcon-sign": "^file:../falcon-sign-js",
+    "falcon-sign": "file:../falcon-sign-js",
     "hardhat-deploy": "^0.11.23",
     "mocha": "10.2.0",
     "solidity-coverage": "^0.8.14",
