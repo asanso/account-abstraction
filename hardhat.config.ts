@@ -44,6 +44,16 @@ const optimizedCompilerSettings = {
   }
 }
 
+const optimizedCompilerSettingsFalcon = {
+  version: '0.8.28',
+  settings: {
+    evmVersion: 'cancun',
+    optimizer: { enabled: false},
+    viaIR: false
+  }
+}
+
+
 subtask(
   TASK_COMPILE_SOLIDITY_GET_SOLC_BUILD,
   async (
@@ -87,9 +97,12 @@ const config: HardhatUserConfig = {
       }
     }],
     overrides: {
-      'contracts/core/EntryPoint.sol': optimizedCompilerSettings,
+      'contracts/core/EntryPoint.sol': optimizedCompilerSettingsFalcon,
       'contracts/core/EntryPointSimulations.sol': optimizedCompilerSettings,
-      'contracts/samples/SimpleAccount.sol': optimizedCompilerSettings
+      'contracts/samples/SimpleAccount.sol': optimizedCompilerSettingsFalcon,
+      'contracts/samples/SimpleAccountFactory.sol': optimizedCompilerSettingsFalcon,
+      'contracts/samples/NTT.sol': optimizedCompilerSettingsFalcon, 
+      'contracts/samples/Falcon.sol': optimizedCompilerSettingsFalcon, 
     }
   },
   networks: {
