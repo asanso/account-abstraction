@@ -138,25 +138,20 @@ describe('FalconSimpleAccount', function () {
       let Falcon512 = await getKernel('falcon512_n3_v1'); // Get falcon512_n3_v1 Kernel
       let keypair = Falcon512.genkey(); // { sk, pk, genKeySeed }
    
-
-      userOp = signUserOp(fillUserOpDefaults({
-        sender: account.address,
-        callGasLimit,
-        verificationGasLimit,
-        maxFeePerGas
-      }), accountOwner, entryPointEoa, chainId)
-
-      userOpHash = await getUserOpHash(userOp, entryPointEoa, chainId)
-      
-      let sign = Falcon512.sign(userOpHash , keypair.sk);
-      const buffer: Buffer = Buffer.from(sign);
-
       let op = fillUserOpDefaults({
         sender: account.address,
         callGasLimit,
         verificationGasLimit,
         maxFeePerGas
       })
+
+
+      userOp = signUserOp(op, accountOwner, entryPointEoa, chainId)
+
+      userOpHash = await getUserOpHash(userOp, entryPointEoa, chainId)
+      
+      let sign = Falcon512.sign(userOpHash , keypair.sk);
+      const buffer: Buffer = Buffer.from(sign);
 
       let op2 =  {
         ...op,
