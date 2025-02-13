@@ -1,12 +1,17 @@
 import '@nomiclabs/hardhat-waffle'
 import '@typechain/hardhat'
-import { HardhatUserConfig, task } from 'hardhat/config'
+import { HardhatUserConfig, subtask,task } from 'hardhat/config'
 import 'hardhat-deploy'
 import '@nomiclabs/hardhat-etherscan'
 
 import 'solidity-coverage'
 
 import * as fs from 'fs'
+
+const {
+  TASK_COMPILE_SOLIDITY_GET_SOLC_BUILD,
+} = require("hardhat/builtin-tasks/task-names");
+const path = require("path");
 
 const SALT = '0x90d8084deab30c2a37c45e8d47f49f2f7965183cb6990a98943ef94940681de3'
 process.env.SALT = process.env.SALT ?? SALT
@@ -38,6 +43,35 @@ const optimizedCompilerSettings = {
     viaIR: true
   }
 }
+
+subtask(
+  TASK_COMPILE_SOLIDITY_GET_SOLC_BUILD,
+  async (
+    args: {
+      solcVersion: string;
+    },
+    hre,
+    runSuper
+  ) => {
+    console.log("subtask TASK_COMPILE_SOLIDITY_GET_SOLC_BUILD");
+    if (process.env.SOLC !== undefined) {
+      console.log(
+          "Using Solidity compiler set in SOLC:",
+          process.env.SOLC
+      );
+      return {
+        compilerPath: process.env.SOLC,
+        isSolcJs: false, // false for native compiler
+        version: args.solcVersion,
+      };
+    }
+    console.log("snooooo");
+    // since we only want to override the compiler for version 0.8.24,
+    // the runSuper function allows us to call the default subtask.
+    return runSuper();
+  }
+);
+
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
