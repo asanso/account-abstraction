@@ -2,6 +2,8 @@ Proof of concept of contracts for [ERC-4337](https://eips.ethereum.org/EIPS/eip-
 
 # Usage
 
+**You need to clone `https://github.com/asanso/falcon-sign-js/` first that replace Shake with Keccac for hash to point**
+
 ```
 yarn install
 yarn test test/falcon-simple-wallet.test.ts
