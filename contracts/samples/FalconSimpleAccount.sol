@@ -89,7 +89,7 @@ contract FalconSimpleAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeab
       * the implementation by calling `upgradeTo()`
       * @param anOwner the owner (signer) of this account
      */
-    function initialize(address anOwner) public virtual initializer {
+    function initialize(address anOwner, uint256[] memory aPublicKey) public virtual initializer {
         _initialize(anOwner);
     }
 
