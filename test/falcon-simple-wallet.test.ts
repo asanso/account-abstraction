@@ -10,8 +10,6 @@ import {
   EntryPoint,
   SimpleAccount,
   SimpleAccount__factory,
-  TestCounter,
-  TestCounter__factory,
   TestUtil,
   TestUtil__factory
 } from '../typechain'
