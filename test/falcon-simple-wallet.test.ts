@@ -9,7 +9,6 @@ import {
   ERC1967Proxy__factory,
   EntryPoint,
   SimpleAccount,
-  SimpleAccountFactory__factory,
   SimpleAccount__factory,
   TestCounter,
   TestCounter__factory,
