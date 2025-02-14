@@ -8,8 +8,8 @@ import { bufferToHex } from 'ethereumjs-util'
 import {
   ERC1967Proxy__factory,
   EntryPoint,
-  SimpleAccount,
-  SimpleAccount__factory,
+  FalconSimpleAccount,
+  FalconSimpleAccount__factory,
   TestUtil,
   TestUtil__factory
 } from '../typechain'
@@ -48,7 +48,7 @@ describe('FalconSimpleAccount', function () {
   })
 
   describe('#validateUserOp', () => {
-    let account: SimpleAccount
+    let account: FalconSimpleAccount
     let userOp: UserOperation
     let userOpHash: string
     let preBalance: number
@@ -63,9 +63,9 @@ describe('FalconSimpleAccount', function () {
       const epAsSigner = await ethers.getSigner(entryPointEoa)
 
       // cant use "SimpleAccountFactory", since it attempts to increment nonce first
-      const implementation = await new SimpleAccount__factory(ethersSigner).deploy(entryPointEoa)
+      const implementation = await new FalconSimpleAccount__factory(ethersSigner).deploy(entryPointEoa)
       const proxy = await new ERC1967Proxy__factory(ethersSigner).deploy(implementation.address, '0x')
-      account = SimpleAccount__factory.connect(proxy.address, epAsSigner)
+      account = FalconSimpleAccount__factory.connect(proxy.address, epAsSigner)
 
       await ethersSigner.sendTransaction({ from: accounts[0], to: account.address, value: parseEther('0.2') })
       const callGasLimit = 200000
