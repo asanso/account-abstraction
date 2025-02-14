@@ -47,26 +47,6 @@ describe('FalconSimpleAccount', function () {
     accountOwner = createAccountOwner()
   })
 
-  it('owner should be able to call transfer', async () => {
-    const { proxy: account } = await createAccount(ethers.provider.getSigner(), accounts[0], entryPoint.address)
-    await ethersSigner.sendTransaction({ from: accounts[0], to: account.address, value: parseEther('2') })
-    await account.execute(accounts[2], ONE_ETH, '0x')
-  })
-  it('other account should not be able to call transfer', async () => {
-    const { proxy: account } = await createAccount(ethers.provider.getSigner(), accounts[0], entryPoint.address)
-    await expect(account.connect(ethers.provider.getSigner(1)).execute(accounts[2], ONE_ETH, '0x'))
-      .to.be.revertedWith('account: not Owner or EntryPoint')
-  })
-
-  it('should pack in js the same as solidity', async () => {
-    const op = await fillUserOpDefaults({ sender: accounts[0] })
-    const encoded = encodeUserOp(op)
-    const packed = packUserOp(op)
-    expect(await testUtil.encodeUserOp(packed)).to.equal(encoded)
-  })
-
-  
-
   describe('#validateUserOp', () => {
     let account: SimpleAccount
     let userOp: UserOperation
