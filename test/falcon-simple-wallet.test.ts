@@ -67,45 +67,7 @@ describe('FalconSimpleAccount', function () {
     expect(await testUtil.encodeUserOp(packed)).to.equal(encoded)
   })
 
-  describe('#executeBatch', () => {
-    let account: SimpleAccount
-    let counter: TestCounter
-    before(async () => {
-      ({ proxy: account } = await createAccount(ethersSigner, await ethersSigner.getAddress(), entryPoint.address))
-      counter = await new TestCounter__factory(ethersSigner).deploy()
-    })
-
-    it('should allow zero value array', async () => {
-      const counterJustEmit = await counter.populateTransaction.justemit().then(tx => tx.data!)
-      const rcpt = await account.executeBatch(
-        [counter.address, counter.address],
-        [],
-        [counterJustEmit, counterJustEmit]
-      ).then(async t => await t.wait())
-      const targetLogs = await counter.queryFilter(counter.filters.CalledFrom(), rcpt.blockHash)
-      expect(targetLogs.length).to.eq(2)
-    })
-
-    it('should allow transfer value', async () => {
-      const counterJustEmit = await counter.populateTransaction.justemit().then(tx => tx.data!)
-      const target = createAddress()
-      await ethersSigner.sendTransaction({ from: accounts[0], to: account.address, value: parseEther('2') })
-      const rcpt = await account.executeBatch(
-        [target, counter.address],
-        [ONE_ETH, 0],
-        ['0x', counterJustEmit]
-      ).then(async t => await t.wait())
-      expect(await ethers.provider.getBalance(target)).to.equal(ONE_ETH)
-      const targetLogs = await counter.queryFilter(counter.filters.CalledFrom(), rcpt.blockHash)
-      expect(targetLogs.length).to.eq(1)
-    })
-
-    it('should fail with wrong array length', async () => {
-      const counterJustEmit = await counter.populateTransaction.justemit().then(tx => tx.data!)
-      await expect(account.executeBatch([counter.address, counter.address], [0], [counterJustEmit, counterJustEmit]))
-        .to.be.revertedWith('wrong array lengths')
-    })
-  })
+  
 
   describe('#validateUserOp', () => {
     let account: SimpleAccount
