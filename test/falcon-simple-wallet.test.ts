@@ -1,7 +1,6 @@
-import { Wallet } from 'ethers'
+import { Wallet, BigNumber } from 'ethers'
 import { ethers } from 'hardhat'
 import { expect } from 'chai'
-import { toHex } from 'hardhat/internal/util/bigint'
 import { bufferToHex } from 'ethereumjs-util'
 
 
@@ -101,7 +100,7 @@ describe('FalconSimpleAccount', function () {
 
       preBalance = await getBalance(account.address)
       const packedOp = packUserOp(userOp)
-      const ret = await account.validateUserOp(packedOp, userOpHash, expectedPay, { gasPrice: actualGasPrice })
+      const ret = await account.validateUserOp(packedOp, userOpHash, expectedPay, { gasPrice: actualGasPrice, gasLimit:  BigNumber.from(30000000) })
       await ret.wait()
     })
 
