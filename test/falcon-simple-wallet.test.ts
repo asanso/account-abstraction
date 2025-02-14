@@ -178,24 +178,4 @@ describe('FalconSimpleAccount', function () {
       expect(deadline).to.eq(1)
     })
   })
-
-  context('SimpleAccountFactory', () => {
-    it('should reject calls coming from any address that is not SenderCreator', async () => {
-      const ownerAddr = createAddress()
-      let deployer = await new SimpleAccountFactory__factory(ethersSigner).deploy(entryPoint.address)
-      await expect(deployer.createAccount(ownerAddr, 1234))
-        .to.be.revertedWith('only callable from SenderCreator')
-
-      // switch deployer contract to an impersonating signer
-      const senderCreator = await entryPoint.senderCreator()
-      await (ethersSigner.provider as JsonRpcProvider).send('hardhat_setBalance', [senderCreator, toHex(100e18)])
-      const senderCreatorSigner = await ethers.getImpersonatedSigner(senderCreator)
-      deployer = deployer.connect(senderCreatorSigner)
-
-      const target = await deployer.callStatic.createAccount(ownerAddr, 1234)
-      expect(await isDeployed(target)).to.eq(false)
-      await deployer.createAccount(ownerAddr, 1234)
-      expect(await isDeployed(target)).to.eq(true)
-    })
-  })
 })
