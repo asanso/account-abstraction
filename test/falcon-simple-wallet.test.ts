@@ -85,10 +85,10 @@ describe('FalconSimpleAccount', function () {
       let Falcon512 = await getKernel('falcon512_n3_v1'); // Get falcon512_n3_v1 Kernel
       let keypair = Falcon512.genkey(); // { sk, pk, genKeySeed }
       let sign = Array.from(Falcon512.sign(userOpHash , keypair.sk));
-      const encodedData = ethers.utils.defaultAbiCoder.encode(["uint256[]"], [sign]);
+      const encodedSignature = ethers.utils.defaultAbiCoder.encode(["uint256[]"], [sign]);
       let op2 =  {
         ...op,
-        signature: encodedData
+        signature: encodedSignature
       }
 
       expectedPay = actualGasPrice * (callGasLimit + verificationGasLimit)
