@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.25;
 import {NTT} from "./NTT.sol";
-
+import "hardhat/console.sol";
 // TODO: make it a library (aka unfuck constants/data)
 contract Falcon {
     uint256 constant n = 512;
@@ -52,6 +52,19 @@ contract Falcon {
             j++;
         }
         return hashed;
+    }
+
+    function v(uint256[] memory h)public view{
+        if (h.length != 512) {
+            console.log("!11");
+            console.log(h[0]);
+        } else {
+            console.log("3333");
+        }
+    }
+
+    function v2()public view{
+        console.log("vvvvvvvvv");
     }
 
     function verify(
