@@ -13,14 +13,10 @@ import {
   TestUtil__factory
 } from '../typechain'
 import {
-  HashZero,
-  ONE_ETH,
-  createAccount,
   createAccountOwner,
-  createAddress,
   deployEntryPoint,
   getBalance,
-  isDeployed
+ 
 } from './testutils'
 import { fillUserOpDefaults, getUserOpHash, encodeUserOp, signUserOp, packUserOp } from './UserOp'
 import { parseEther } from 'ethers/lib/utils'
@@ -68,6 +64,7 @@ describe('FalconSimpleAccount', function () {
       const implementation = await new FalconSimpleAccount__factory(ethersSigner).deploy(entryPointEoa)
       const proxy = await new ERC1967Proxy__factory(ethersSigner).deploy(implementation.address, '0x')
       account = FalconSimpleAccount__factory.connect(proxy.address, epAsSigner)
+      account.initialize(accountOwner.address,Array.from(keypair.pk))
 
       await ethersSigner.sendTransaction({ from: accounts[0], to: account.address, value: parseEther('0.2') })
       const callGasLimit = 200000
