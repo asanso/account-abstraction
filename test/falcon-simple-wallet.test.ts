@@ -80,14 +80,14 @@ describe('FalconSimpleAccount', function () {
       })
       userOp = signUserOp(op, accountOwner, entryPointEoa, chainId)
       userOpHash = await getUserOpHash(userOp, entryPointEoa, chainId)
-      
-      let sign = Array.from(Falcon512.sign(userOpHash , keypair.sk));
+      const salt = new Uint8Array(40);
+      crypto.getRandomValues(salt);
+      let sign = Array.from(Falcon512.sign(userOpHash , keypair.sk, salt));
       const encodedSignature = ethers.utils.defaultAbiCoder.encode(["uint256[]"], [sign]);
       let op2 =  {
         ...op,
         signature: encodedSignature
       }
-
       expectedPay = actualGasPrice * (callGasLimit + verificationGasLimit)
       preBalance = await getBalance(account.address)
       const packedOp = packUserOp(op2)
