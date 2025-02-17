@@ -92,7 +92,6 @@ describe('FalconSimpleAccount', function () {
       }
 
       expectedPay = actualGasPrice * (callGasLimit + verificationGasLimit)
-
       preBalance = await getBalance(account.address)
       const packedOp = packUserOp(op2)
       const ret = await account.validateUserOp(packedOp, userOpHash, expectedPay, { gasPrice: actualGasPrice, gasLimit:  BigNumber.from(30000000) })
