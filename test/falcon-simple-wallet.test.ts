@@ -58,6 +58,9 @@ describe('FalconSimpleAccount', function () {
     let entryPointEoa: string
 
     before(async () => {
+      // Wait for the Falcon512 kernel
+      let Falcon512 = await getKernel('falcon512_n3_v1'); // Get falcon512_n3_v1 Kernel
+      let keypair = Falcon512.genkey(); // { sk, pk, genKeySeed }
       entryPointEoa = accounts[2]
       const epAsSigner = await ethers.getSigner(entryPointEoa)
 
@@ -81,9 +84,6 @@ describe('FalconSimpleAccount', function () {
       userOp = signUserOp(op, accountOwner, entryPointEoa, chainId)
       userOpHash = await getUserOpHash(userOp, entryPointEoa, chainId)
       
-      // Wait for the Falcon512 kernel
-      let Falcon512 = await getKernel('falcon512_n3_v1'); // Get falcon512_n3_v1 Kernel
-      let keypair = Falcon512.genkey(); // { sk, pk, genKeySeed }
       let sign = Array.from(Falcon512.sign(userOpHash , keypair.sk));
       const encodedSignature = ethers.utils.defaultAbiCoder.encode(["uint256[]"], [sign]);
       let op2 =  {
