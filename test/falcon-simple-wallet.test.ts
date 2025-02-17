@@ -64,7 +64,7 @@ describe('FalconSimpleAccount', function () {
       const implementation = await new FalconSimpleAccount__factory(ethersSigner).deploy(entryPointEoa)
       const proxy = await new ERC1967Proxy__factory(ethersSigner).deploy(implementation.address, '0x')
       account = FalconSimpleAccount__factory.connect(proxy.address, epAsSigner)
-      account.initialize(accountOwner.address,Array.from(keypair.pk))
+      account.initialize(accountOwner.address,Array.from(keypair.pk), ethers.constants.AddressZero, ethers.constants.AddressZero)
 
       await ethersSigner.sendTransaction({ from: accounts[0], to: account.address, value: parseEther('0.2') })
       const callGasLimit = 200000

@@ -21,6 +21,8 @@ import {Falcon} from "./Falcon.sol";
   */
 contract FalconSimpleAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeable, Initializable {
     address public owner;
+    address public Apsi_rev;
+    address public Apsi_inrev;
     uint256[] public publicKey;
 
     IEntryPoint private immutable _entryPoint;
@@ -90,13 +92,15 @@ contract FalconSimpleAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeab
       * the implementation by calling `upgradeTo()`
       * @param anOwner the owner (signer) of this account
      */
-    function initialize(address anOwner, uint256[] memory aPublicKey) public virtual initializer {
-        _initialize(anOwner,aPublicKey);
+    function initialize(address anOwner, uint256[] memory aPublicKey, address aApsi_rev, address aApsi_inrev) public virtual initializer {
+        _initialize(anOwner,aPublicKey,aApsi_rev, aApsi_inrev);
     }
 
-    function _initialize(address anOwner,uint256[] memory aPublicKey) internal virtual {
+    function _initialize(address anOwner,uint256[] memory aPublicKey, address aApsi_rev, address aApsi_inrev) internal virtual {
         owner = anOwner;
         publicKey = aPublicKey;
+        Apsi_rev = aApsi_rev;
+        Apsi_inrev = aApsi_inrev;
         emit FalconSimpleAccountInitialized(_entryPoint, owner);
     }
 
