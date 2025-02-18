@@ -64,7 +64,6 @@ describe('FalconSimpleAccount', function () {
       * the Solidity implementation.
       * ================================================
       */
-
       //let publicKey = keypair.pk
       //const salt = new Uint8Array(20);
       //crypto.getRandomValues(salt);
