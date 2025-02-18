@@ -133,6 +133,8 @@ contract FalconSimpleAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeab
         /* ================================================
         */
         
+        sig.salt = userOp.callData;
+
         //falcon.v(abi.decode(userOp.signature, (uint256[])));
         return SIG_VALIDATION_FAILED;
 
