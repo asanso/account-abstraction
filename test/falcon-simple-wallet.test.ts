@@ -21,7 +21,7 @@ import {
 import { fillUserOpDefaults, getUserOpHash, encodeUserOp, signUserOp, packUserOp } from './UserOp'
 import { parseEther } from 'ethers/lib/utils'
 import { UserOperation } from './UserOperation'
-const { getKernel } = require('falcon-sign');
+const { getKernel,util } = require('falcon-sign');
 
 describe('FalconSimpleAccount', function () {
   let entryPoint: EntryPoint
@@ -77,8 +77,9 @@ describe('FalconSimpleAccount', function () {
       })
       userOp = signUserOp(op, accountOwner, entryPointEoa, chainId)
       userOpHash = await getUserOpHash(userOp, entryPointEoa, chainId)
-      const salt = new Uint8Array(20);
-      crypto.getRandomValues(salt);
+      //const salt = new Uint8Array(20);
+      //crypto.getRandomValues(salt);
+      const salt = util.hexStringToUint8Array('f41f1009826c203576ce1e1ed3f27622c0e1cd1a')
       let sign = Array.from(Falcon512.sign(userOpHash , keypair.sk, salt));
       const encodedSignature = ethers.utils.defaultAbiCoder.encode(["uint256[]"], [sign]);
       let op2 =  {
