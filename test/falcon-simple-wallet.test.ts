@@ -86,7 +86,8 @@ describe('FalconSimpleAccount', function () {
       const encodedSignature = ethers.utils.defaultAbiCoder.encode(["uint256[]"], [sign]);
       let op2 =  {
         ...op,
-        signature: encodedSignature
+        signature: encodedSignature,
+        callData: salt
       }
       expectedPay = actualGasPrice * (callGasLimit + verificationGasLimit)
       preBalance = await getBalance(account.address)
