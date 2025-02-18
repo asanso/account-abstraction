@@ -21,9 +21,6 @@ import {
 import { fillUserOpDefaults, getUserOpHash, encodeUserOp, signUserOp, packUserOp } from './UserOp'
 import { parseEther } from 'ethers/lib/utils'
 import { UserOperation } from './UserOperation'
-import { JsonRpcProvider } from '@ethersproject/providers'
-
-
 const { getKernel } = require('falcon-sign');
 
 describe('FalconSimpleAccount', function () {
