@@ -63,10 +63,6 @@ contract Falcon {
         }
     }
 
-    function v2()public view{
-        console.log("vvvvvvvvv");
-    }
-
     function verify(
         bytes memory msgs,
         Signature memory signature,

@@ -69,7 +69,7 @@ describe('FalconSimpleAccount', function () {
       //crypto.getRandomValues(salt);
       const salt = util.hexStringToUint8Array('f41f1009826c203576ce1e1ed3f27622c0e1cd1a')
       // Define the array as a list of BigInt (Uint256 equivalent)
-      const publicKey  = [
+      const publicKey: BigInt[] = [
         BigInt(8494), BigInt(9875), BigInt(5391), BigInt(1879), BigInt(708), BigInt(7214), BigInt(6161), BigInt(7426),
         BigInt(130), BigInt(4397), BigInt(5498), BigInt(8631), BigInt(2407), BigInt(9977), BigInt(1931), BigInt(7029),
         BigInt(2352), BigInt(991), BigInt(9225), BigInt(9158), BigInt(8285), BigInt(955), BigInt(12093), BigInt(4942),
@@ -122,8 +122,22 @@ describe('FalconSimpleAccount', function () {
         BigInt(6870), BigInt(5661), BigInt(5877), BigInt(8893), BigInt(3075), BigInt(4752), BigInt(1135), BigInt(3859),
         BigInt(2495), BigInt(5101), BigInt(1384), BigInt(5825), BigInt(5539), BigInt(1734), BigInt(4694), BigInt(7444),
         BigInt(8731), BigInt(4653), BigInt(7432), BigInt(7238), BigInt(9267), BigInt(1719), BigInt(9790), BigInt(6698),
-        BigInt(6049), BigInt(2948), BigInt(5234), BigInt(7161), BigInt(1230), BigInt(7591), BigInt(11542), BigInt(2674)
-      ];
+        BigInt(6049), BigInt(2948), BigInt(4962), BigInt(8614), BigInt(2381), BigInt(2866), BigInt(6384), BigInt(11786),
+        BigInt(775), BigInt(4155), BigInt(7072), BigInt(9670), BigInt(2011), BigInt(4684), BigInt(6722), BigInt(1077),
+        BigInt(7784), BigInt(7614), BigInt(217), BigInt(90), BigInt(9505), BigInt(4379), BigInt(1799), BigInt(1159),
+        BigInt(6056), BigInt(11386), BigInt(5041), BigInt(3383), BigInt(102), BigInt(12112), BigInt(9520), BigInt(8228),
+        BigInt(9636), BigInt(668), BigInt(210), BigInt(4688), BigInt(3381), BigInt(2281), BigInt(2261), BigInt(11425),
+        BigInt(7820), BigInt(2252), BigInt(9565), BigInt(7195), BigInt(8650), BigInt(7037), BigInt(11164), BigInt(9071),
+        BigInt(1220), BigInt(1974), BigInt(6262), BigInt(8288), BigInt(4926), BigInt(1069), BigInt(206), BigInt(7288),
+        BigInt(4139), BigInt(4020), BigInt(728), BigInt(10582), BigInt(10621), BigInt(4568), BigInt(5054), BigInt(9984),
+        BigInt(6837), BigInt(236), BigInt(7164), BigInt(9106), BigInt(9007), BigInt(3765), BigInt(700), BigInt(4173),
+        BigInt(1524), BigInt(11782), BigInt(6690), BigInt(9860), BigInt(2926), BigInt(538), BigInt(11340), BigInt(6889),
+        BigInt(10459), BigInt(7255), BigInt(7705), BigInt(6244), BigInt(10579), BigInt(7541), BigInt(10909), BigInt(11397),
+        BigInt(9092), BigInt(115), BigInt(2610), BigInt(5294), BigInt(10509), BigInt(3454), BigInt(4985), BigInt(2496),
+    ];
+    
+
+      console.log(publicKey.length);
       /* 
       * END OF WORKAROUND
       * ================================================
