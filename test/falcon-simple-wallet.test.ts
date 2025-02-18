@@ -115,7 +115,7 @@ describe('FalconSimpleAccount', function () {
         BigInt(6049), BigInt(2948), BigInt(5234), BigInt(7161), BigInt(1230), BigInt(7591), BigInt(11542), BigInt(2674)
       ];
       // Declare the array as a list of BigInt (or regular integers, if values are within range)
-      const s1: BigInt[] = [
+      const s: BigInt[] = [
         BigInt(-71), BigInt(94), BigInt(208), BigInt(67), BigInt(77), BigInt(122), BigInt(80), BigInt(-464), BigInt(198),
         BigInt(494), BigInt(-96), BigInt(-120), BigInt(-61), BigInt(-53), BigInt(182), BigInt(59), BigInt(108), BigInt(-275),
         BigInt(-166), BigInt(195), BigInt(-375), BigInt(-91), BigInt(90), BigInt(-48), BigInt(252), BigInt(287), BigInt(111),
