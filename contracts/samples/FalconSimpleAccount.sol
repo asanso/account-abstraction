@@ -104,7 +104,7 @@ contract FalconSimpleAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeab
         publicKey = aPublicKey;
         Apsi_rev = aApsi_rev;
         Apsi_inrev = aApsi_inrev;
-        //ntt = new ZKNOX_NTT(Apsi_rev, Apsi_inrev, 12289, 12265);
+        ntt = new ZKNOX_NTT(Apsi_rev, Apsi_inrev, 12289, 12265);
         falcon = new ZKNOX_falcon(ntt, h2p);
         emit FalconSimpleAccountInitialized(_entryPoint, owner);
     }
