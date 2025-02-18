@@ -27,9 +27,9 @@ contract FalconSimpleAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeab
     uint256[] public publicKey;
 
     IEntryPoint private immutable _entryPoint;
-    ZKNOX_falcon private immutable falcon;
-    ZKNOX_NTT private immutable ntt;
-    ZKNOX_HashToPoint h2p = new ZKNOX_HashToPoint();
+    ZKNOX_falcon private falcon;
+    ZKNOX_NTT private ntt;
+    ZKNOX_HashToPoint private h2p = new ZKNOX_HashToPoint();
 
     event FalconSimpleAccountInitialized(IEntryPoint indexed entryPoint, address indexed owner);
 
