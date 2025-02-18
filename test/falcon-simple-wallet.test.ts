@@ -54,6 +54,17 @@ describe('FalconSimpleAccount', function () {
       // Wait for the Falcon512 kernel
       let Falcon512 = await getKernel('falcon512_n3_v1'); // Get falcon512_n3_v1 Kernel
       let keypair = Falcon512.genkey(); // { sk, pk, genKeySeed }
+
+      /* 
+      * ================================================
+      * TEMPORARY WORKAROUND: 
+      * 
+      * This implementation is used until the encoding of the signature
+      * in https://github.com/asanso/falcon-sign-js/ is compatible with
+      * the Solidity implementation.
+      * ================================================
+      */
+
       //let publicKey = keypair.pk
       //const salt = new Uint8Array(20);
       //crypto.getRandomValues(salt);
@@ -114,6 +125,10 @@ describe('FalconSimpleAccount', function () {
         BigInt(8731), BigInt(4653), BigInt(7432), BigInt(7238), BigInt(9267), BigInt(1719), BigInt(9790), BigInt(6698),
         BigInt(6049), BigInt(2948), BigInt(5234), BigInt(7161), BigInt(1230), BigInt(7591), BigInt(11542), BigInt(2674)
       ];
+      /* 
+      * END OF WORKAROUND
+      * ================================================
+      */
       entryPointEoa = accounts[2]
       const epAsSigner = await ethers.getSigner(entryPointEoa)
 
