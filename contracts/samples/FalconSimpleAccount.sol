@@ -113,7 +113,6 @@ contract FalconSimpleAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeab
     function _validateSignature(PackedUserOperation calldata userOp, bytes32 userOpHash)
     internal override virtual returns (uint256 validationData) {
         console.log("validating signature...");
-
         //falcon.v(abi.decode(userOp.signature, (uint256[])));
         return SIG_VALIDATION_FAILED;
 
