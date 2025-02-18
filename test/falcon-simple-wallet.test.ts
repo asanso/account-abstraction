@@ -54,6 +54,11 @@ describe('FalconSimpleAccount', function () {
       // Wait for the Falcon512 kernel
       let Falcon512 = await getKernel('falcon512_n3_v1'); // Get falcon512_n3_v1 Kernel
       let keypair = Falcon512.genkey(); // { sk, pk, genKeySeed }
+      let publicKey = keypair.pk
+      //const salt = new Uint8Array(20);
+      //crypto.getRandomValues(salt);
+      const salt = util.hexStringToUint8Array('f41f1009826c203576ce1e1ed3f27622c0e1cd1a')
+
       entryPointEoa = accounts[2]
       const epAsSigner = await ethers.getSigner(entryPointEoa)
 
@@ -63,7 +68,7 @@ describe('FalconSimpleAccount', function () {
       account = FalconSimpleAccount__factory.connect(proxy.address, epAsSigner)
       const FalconConstantsFactory = await ethers.getContractFactory("FalconConstants");
       const falconConstants = await FalconConstantsFactory.deploy();
-      account.initialize(accountOwner.address,Array.from(keypair.pk), falconConstants.address, falconConstants.address)
+      account.initialize(accountOwner.address,Array.from(publicKey), falconConstants.address, falconConstants.address)
 
       await ethersSigner.sendTransaction({ from: accounts[0], to: account.address, value: parseEther('0.2') })
       const callGasLimit = 200000
@@ -79,9 +84,6 @@ describe('FalconSimpleAccount', function () {
       })
       userOp = signUserOp(op, accountOwner, entryPointEoa, chainId)
       userOpHash = await getUserOpHash(userOp, entryPointEoa, chainId)
-      //const salt = new Uint8Array(20);
-      //crypto.getRandomValues(salt);
-      const salt = util.hexStringToUint8Array('f41f1009826c203576ce1e1ed3f27622c0e1cd1a')
       let sign = Array.from(Falcon512.sign(userOpHash , keypair.sk, salt));
       const encodedSignature = ethers.utils.defaultAbiCoder.encode(["uint256[]"], [sign]);
       let op2 =  {
