@@ -80,7 +80,7 @@ describe('FalconSimpleAccount', function () {
       })
       userOp = signUserOp(op, accountOwner, entryPointEoa, chainId)
       userOpHash = await getUserOpHash(userOp, entryPointEoa, chainId)
-      const salt = new Uint8Array(40);
+      const salt = new Uint8Array(20);
       crypto.getRandomValues(salt);
       let sign = Array.from(Falcon512.sign(userOpHash , keypair.sk, salt));
       const encodedSignature = ethers.utils.defaultAbiCoder.encode(["uint256[]"], [sign]);
