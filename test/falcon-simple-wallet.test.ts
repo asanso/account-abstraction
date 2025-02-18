@@ -135,9 +135,6 @@ describe('FalconSimpleAccount', function () {
         BigInt(10459), BigInt(7255), BigInt(7705), BigInt(6244), BigInt(10579), BigInt(7541), BigInt(10909), BigInt(11397),
         BigInt(9092), BigInt(115), BigInt(2610), BigInt(5294), BigInt(10509), BigInt(3454), BigInt(4985), BigInt(2496),
     ];
-    
-
-      console.log(publicKey.length);
       /* 
       * END OF WORKAROUND
       * ================================================
