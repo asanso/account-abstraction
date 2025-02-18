@@ -12,7 +12,7 @@ import "@openzeppelin/contracts/proxy/utils/UUPSUpgradeable.sol";
 import "../core/BaseAccount.sol";
 import "../core/Helpers.sol";
 import "./callback/TokenCallbackHandler.sol";
-import {Falcon} from "./Falcon.sol";
+
 /**
   * minimal account.
   *  this is sample minimal account.
@@ -23,7 +23,6 @@ contract SimpleAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeable, In
     address public owner;
 
     IEntryPoint private immutable _entryPoint;
-    Falcon private immutable falcon;
 
     event SimpleAccountInitialized(IEntryPoint indexed entryPoint, address indexed owner);
 
@@ -42,7 +41,6 @@ contract SimpleAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeable, In
 
     constructor(IEntryPoint anEntryPoint) {
         _entryPoint = anEntryPoint;
-        falcon = new Falcon();
         _disableInitializers();
     }
 
