@@ -175,10 +175,6 @@ describe('FalconSimpleAccount', function () {
         BigInt(15), BigInt(320), BigInt(-188), BigInt(-180), BigInt(-116), BigInt(-179), BigInt(-249)
       ];
 
-// Example usage:
-console.log(tmp_s1[0]); // Accessing the first element
-
-
       entryPointEoa = accounts[2]
       const epAsSigner = await ethers.getSigner(entryPointEoa)
 
