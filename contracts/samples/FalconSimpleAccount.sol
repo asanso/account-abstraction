@@ -22,8 +22,8 @@ import "./ZKNOX_falcon.sol";
   */
 contract FalconSimpleAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeable, Initializable {
     address public owner;
-    address public Apsi_rev;
-    address public Apsi_inrev;
+    address public psi_rev;
+    address public psi_inv_rev;
     uint256[] public publicKey;
 
     IEntryPoint private immutable _entryPoint;
@@ -102,9 +102,9 @@ contract FalconSimpleAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeab
     function _initialize(address anOwner,uint256[] memory aPublicKey, address aApsi_rev, address aApsi_inrev) internal virtual {
         owner = anOwner;
         publicKey = aPublicKey;
-        Apsi_rev = aApsi_rev;
-        Apsi_inrev = aApsi_inrev;
-        ntt = new ZKNOX_NTT(Apsi_rev, Apsi_inrev, 12289, 12265);
+        psi_rev = aApsi_rev;
+        psi_inv_rev = aApsi_inrev;
+        ntt = new ZKNOX_NTT(psi_rev, psi_inv_rev, 12289, 12265);
         falcon = new ZKNOX_falcon(ntt, h2p);
         emit FalconSimpleAccountInitialized(_entryPoint, owner);
     }
